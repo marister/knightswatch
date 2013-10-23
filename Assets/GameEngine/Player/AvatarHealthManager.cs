@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
+/**
+ * Inherits from all objects that has health.
+ * The tower logic for what should be shown
+ * when it looses/gains health...
+ */ 
 public class AvatarHealthManager : HealthManager {
 	
 	public override void Start(){

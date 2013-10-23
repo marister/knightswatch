@@ -20,6 +20,7 @@ public class EnemySpider : Enemy{
 	}
 
 	protected override void playAttackAnimation(){
+		//right now randomizes between the 2 death animations...
 		animation.Play("attack" + Random.Range(1,2));	
 	}
 	

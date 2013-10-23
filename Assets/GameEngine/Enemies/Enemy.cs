@@ -1,6 +1,22 @@
 using UnityEngine;
 using System.Collections;
 
+//TODO  decide if to break this logicly?
+//TODO  shit load of stuff that enemies are still missing like health bars,
+//		scrolling text, better AI?, deal damage logic to make sense, experience gold systems?
+//		loot? unique behavior such as bosses?
+//TODO	use some enum status to determine what state this enemy is right now?
+//		i.e. { ATTACKING, FROZEN, SLOWED, WALKING, RUNNING, DEAD } etc...
+//TODO	generic death animations
+//TODO  get ALL enemies (current known enemies) specs decided on BEFORE continuing
+
+/**
+ * Base enemy class.
+ * Currently this class holds all of enemy logic
+ * all enemies should inherit from this base class.
+ * All methods that might needs overwriting for specific behavior (like animations?)
+ * should override the virtual methods.
+ */ 
 public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 	public float ememyMovementSpeed;
 	public float healthPoints;
@@ -9,7 +25,7 @@ public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 	public int experiencePoints;
 	public int baseGold;
 	
-	/** AI **/
+	////// AI
 	public float distanceToAttackTower;
 	public float distanceToAttackPlayer;
 	public float attackRadius;
@@ -21,7 +37,7 @@ public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 	protected float attackCooldownLeft = 0;
 	protected CharacterController controller;
 	
-	/* 2d plain collider */
+	///// 2d plain collider for a seperate plain???
 	private SphereCollider collider; //for the 2d collider
 	public float enemyColliderRadius = 2.5f;
 	
@@ -65,6 +81,7 @@ public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 		controller.SimpleMove(forward * ememyMovementSpeed);
 	}
 	
+	// This function should start handeling AI
 	protected GameObject getCurrentTarget(){
 		GameObject tower = GameObject.FindGameObjectWithTag("MainTower");
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -81,6 +98,8 @@ public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 		return tower;
 	}
 	
+
+	 // Determines wether the player should advance or attack	 
 	protected bool needsToAdvance(Vector3 targetPosition){	
 		float distanceToTarget = Vector3.Distance(targetPosition, transform.position);
 		if(distanceToTarget > attackRadius){
@@ -115,6 +134,7 @@ public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 		}
 		
 		if(damageEventParams.target == gameObject){
+			//TODO currently dies when taking a hit, should be changed to health management...
 			die();
 		}
 	}
@@ -136,6 +156,7 @@ public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 		Destroy(gameObject, 3);
 	}
 	
+	//These methods should be overwridden by each enemy (for sure)
 	protected virtual void playAttackAnimation(){}
 	protected virtual void playDeathAnimation(){}
 	protected virtual void forceWalkAnimation(){}

@@ -4,11 +4,16 @@
 using UnityEngine;
 using System.Collections;
 
+//TODO check the warnings of this file...
+
+/**
+ * Unity's 3rd person script translated to c# on the forums
+ */ 
 public class ThirdPersonController : MonoBehaviour 
 {
 	
 	// Require a character controller to be attached to the same game object
-	//@script RequireComponent(CharacterController)
+	// @script RequireComponent(CharacterController)
 	
 	public AnimationClip idleAnimation;
 	public AnimationClip walkAnimation;

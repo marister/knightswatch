@@ -1,8 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
+//TODO create custom wave logics that inherit from this?
+//TODO probably rename this if the game is not going to be wave logic based
+//TODO get all gameplay specs planned BEFORE continuing with this!
+
 /**
  *	Used to spawn waves
+ *  This class manages the spawning of enemies and waves logic
  */
 public class WaveSpawner : MonoBehaviour {
 	public float timeBetweenWaves; // rough base to the time between bosses
