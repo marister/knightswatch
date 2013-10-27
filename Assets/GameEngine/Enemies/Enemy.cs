@@ -37,21 +37,11 @@ public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 	protected float attackCooldownLeft = 0;
 	protected CharacterController controller;
 	
-	///// 2d plain collider for a seperate plain???
-	private SphereCollider collider; //for the 2d collider
-	public float enemyColliderRadius = 2.5f;
 	
 	protected virtual void Start(){
 		initializeDamageTakenListener();
-		create2dCollider();
 	}
-	
-	protected void create2dCollider(){
-		collider = gameObject.AddComponent("SphereCollider") as SphereCollider;
-		collider.isTrigger = true;
-		collider.radius = enemyColliderRadius;
-	}
-	
+
 	public void initializeDamageTakenListener(){
 		Messenger<DamageEventParams>.AddListener("damage dealt", onDamageTaken);
 	}
@@ -62,7 +52,6 @@ public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 		}
 		
 		GameObject currentTarget = getCurrentTarget();
-		collider.center = new Vector3(0, GlobalConfig.plainHeight, 0);
 		
 		if(needsToAdvance(currentTarget.transform.position)){			
 			move(currentTarget.transform);
@@ -152,7 +141,6 @@ public class Enemy : MonoBehaviour, DamageDealer, DamageReciever {
 		Messenger<DamageEventParams>.RemoveListener("damage dealt", onDamageTaken);
 		isDead = true;
 		playDeathAnimation();
-		Destroy(gameObject.collider);
 		Destroy(gameObject, 3);
 	}
 	

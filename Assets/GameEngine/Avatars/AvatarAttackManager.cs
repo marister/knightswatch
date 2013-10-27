@@ -13,13 +13,13 @@ using System.Collections;
  */
 public class AvatarAttackManager : MonoBehaviour, DamageDealer {
 	public float basePlayerDamage;
-	
 	public float qAbilityCooldown;
 	public float qAbilityDistance = 100f;
-	public Transform qAbilityPrefab; //what game object we should use for the shot graphic
 	
 	protected float qAbilityCooldownLeft = 0;
-	
+
+    private GameObject currentTarget; //refrence to current target if exists.
+
 	// Use this for initialization
 	void Start () {
 	
@@ -30,7 +30,10 @@ public class AvatarAttackManager : MonoBehaviour, DamageDealer {
 		qAbilityTick();
 		//listen to input and fire
 		if(Input.GetKeyDown ("q") && qAbilityOffCoolDown()){
-			precheckForTargetAiming();
+            //TODO noni system for precheking with rays!
+            //currentTarget = precheckForTargetAiming(); 
+            
+            dispatchQAbility(null);
 		}
 	}
 	
@@ -55,9 +58,8 @@ public class AvatarAttackManager : MonoBehaviour, DamageDealer {
 	 * when a player fire at a target in a straight line the shot should aim
 	 * at that target automaticly
 	 * How the fuck to implement it well?
-	 * //TODO ask noni if it should KEEP auto targeting.
 	 */ 
-	protected virtual void precheckForTargetAiming(){
+	protected virtual GameObject precheckForTargetAiming(){
 		RaycastHit hitInfo;
 		Vector3 raySource = transform.position;
 		raySource.y = GlobalConfig.plainHeight; //make sure colliders are always at height 0
@@ -65,22 +67,19 @@ public class AvatarAttackManager : MonoBehaviour, DamageDealer {
 		Debug.DrawRay(raySource, transform.TransformDirection(Vector3.forward) * qAbilityDistance, Color.red, 2);
 		
         if (Physics.Raycast(raySource, transform.TransformDirection(Vector3.forward), out hitInfo, qAbilityDistance)){
-			fireQAbility(hitInfo.collider.gameObject);
+            return hitInfo.collider.gameObject;
 		}
+        return null;
 	}
 	
 	/**
 	 * This should hold the logic for the q ability
 	 * should probably be overwritten by each avatar for their own Q
-	 * should change to "onQhit" since the logic should be applied when
+	 * TODO should change to "onQhit" since the logic should be applied when
 	 * we actually hit the Q not only fire ?!?!?!?!
-	 */ 
-	public virtual void fireQAbility(GameObject target){
-		if(target == null){ //if we didnt find a target
-			//fire ahead
-		} else {
-			//fire to target
-		}
+	 */
+    public virtual void dispatchQAbility(GameObject target) {
+		
 	}
 	
 	/**

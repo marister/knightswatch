@@ -92,7 +92,7 @@ public class ThirdPersonController : MonoBehaviour
 	private float lastJumpTime= -1.0f;
 	
 	// the height we jumped from (Used to determine for how long to apply extra jump power after jumping.)
-	private float lastJumpStartHeight= 0.0f;
+	//TODO check with unity? private float lastJumpStartHeight= 0.0f;
 	private Vector3 inAirVelocity= Vector3.zero;
 	private float lastGroundedTime= 0.0f;
 	
@@ -282,7 +282,8 @@ public class ThirdPersonController : MonoBehaviour
 	void  ApplyGravity (){
 		if (isControllable){ // don't move player at all if not controllable.
 			// Apply gravity
-			bool jumpButton= Input.GetButton("Jump");
+            //TODO whats this? check against unity's javascript version...
+			//bool jumpButton= Input.GetButton("Jump");
 			
 			// When we reach the apex of the jump we send out a message
 			if (jumping && !jumpingReachedApex && verticalSpeed <= 0.0f){
@@ -307,7 +308,7 @@ public class ThirdPersonController : MonoBehaviour
 		jumping = true;
 		jumpingReachedApex = false;
 		lastJumpTime = Time.time;
-		lastJumpStartHeight = transform.position.y;
+		//TODO check with js unity? lastJumpStartHeight = transform.position.y;
 		lastJumpButtonTime = -10;
 		
 		_characterState = CharacterState.Jumping;

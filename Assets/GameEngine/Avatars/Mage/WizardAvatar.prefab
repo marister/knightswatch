@@ -993,13 +993,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1a89c2e1b1710c43a5b56286f5109e6, type: 3}
+  m_Script: {fileID: 11500000, guid: d4eaff403eabcee46b600e427a88558f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basePlayerDamage: 1
-  qAbilityCooldown: .100000001
+  basePlayerDamage: 0
+  qAbilityCooldown: 2
   qAbilityDistance: 100
-  qAbilityPrefab: {fileID: 400000, guid: 044f00b4853f64444a1c9ed5b35ab20f, type: 2}
+  qAbilityPrefab: {fileID: 5400000, guid: 044f00b4853f64444a1c9ed5b35ab20f, type: 2}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
